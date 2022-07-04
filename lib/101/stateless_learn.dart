@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class StatelessLearn extends StatelessWidget {
   final String text2 = "hamza";
 
+  const StatelessLearn({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
