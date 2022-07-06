@@ -14,15 +14,15 @@ class ContainerSizedBoxLearn extends StatelessWidget {
             height: 200,
             child: Text('a' * 500),
           ),
-          SizedBox.shrink(),
+          const SizedBox.shrink(),
           Container(
             height: 50,
             constraints: const BoxConstraints(
                 maxHeight: 100, maxWidth: 150, minWidth: 100),
-            child: Text('aa' * 2),
             padding: const EdgeInsets.all(10),
             margin: const EdgeInsets.all(10),
             decoration: ProjectUtility.boxDecoration,
+            child: Text('aa' * 2),
           )
         ],
       ),

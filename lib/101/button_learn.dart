@@ -10,7 +10,6 @@ class ButtonLearn extends StatelessWidget {
       body: Column(
         children: [
           TextButton(
-            child: Text('Save', style: Theme.of(context).textTheme.subtitle1),
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.resolveWith((states) {
               if (states.contains(MaterialState.pressed)) {
@@ -19,6 +18,7 @@ class ButtonLearn extends StatelessWidget {
               return Colors.white;
             })),
             onPressed: () {},
+            child: Text('Save', style: Theme.of(context).textTheme.subtitle1),
           ),
           const ElevatedButton(onPressed: null, child: Text('data')),
           IconButton(onPressed: () {}, icon: const Icon(Icons.abc_rounded)),

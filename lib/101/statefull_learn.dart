@@ -1,9 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_full_learn/product/counter_hello_button.dart';
 import 'package:flutter_full_learn/product/language/language_items.dart';
 
 class StatefullLearn extends StatefulWidget {
-  StatefullLearn({Key? key}) : super(key: key);
+  const StatefullLearn({Key? key}) : super(key: key);
 
   @override
   State<StatefullLearn> createState() => _StatefullLearnState();
@@ -46,7 +47,9 @@ class _StatefullLearnState extends State<StatefullLearn> {
   }
 
   FloatingActionButton _incrementButton() {
-    print('burda');
+    if (kDebugMode) {
+      print('burda');
+    }
     return FloatingActionButton(
       onPressed: () {
         _updateCounter(true);
