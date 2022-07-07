@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_full_learn/202/theme/light_theme.dart';
+import 'package:flutter_full_learn/product/global/resource_context.dart';
 import 'package:flutter_full_learn/product/global/theme_notifier.dart';
-import '202/alert_learn.dart';
+import 'package:provider/provider.dart';
 import '303/lottie_learn.dart';
+import '303/mobx_image_picker/view/mobx_image_upload_view.dart';
+import 'product/navigator/navigator_manager.dart';
+import 'product/navigator/navigator_custom.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      Provider(create: (_) => ResourceContext()),
+      ChangeNotifierProvider<ThemeNotifer>(create: (context) => ThemeNotifer())
+    ],
+    builder: (context, child) => const MyApp(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget with NavigatorCustom {
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
@@ -55,7 +64,20 @@ class MyApp extends StatelessWidget {
       //       backgroundColor: Colors.transparent,
       //       elevation: 0,
       //     )),
-      home: const LottieLearn(),
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(
+          builder: (context) {
+            return const LottieLearn();
+          },
+        );
+      },
+      // builder: (context,widget){
+
+      // },
+      // routes: NavigatorRoures().items,
+      onGenerateRoute: onGenerateRoute,
+      navigatorKey: NavigatorManager.instance.navigatorGlobalKey,
+      home: const MobxImageUpload(),
     );
   }
 }

@@ -5,6 +5,8 @@ import '../product/global/theme_notifier.dart';
 // import '../product/navigator/navigator_routes.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+
+import '../product/navigator/navigator_routes.dart';
 // import 'package:uikit/uikit.dart';
 
 class LottieLearn extends StatefulWidget {
@@ -29,7 +31,7 @@ class _LottieLearnState extends State<LottieLearn>
 
   Future<void> navigateToHome() async {
     await Future.delayed(const Duration(seconds: 1));
-    // Navigator.of(context).pushReplacementNamed(NavigateRoutes.home.withParaf);
+    Navigator.of(context).pushReplacementNamed(NavigateRoutes.home.withParaf);
   }
 
   @override
