@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../202/image_learn_202.dart';
 import '../model/resource_model.dart';
 import '../service/reqres_service.dart';
 import '../viewModel/req_res_provider.dart';
 import '../../../product/extension/string_extension.dart';
 import '../../../product/service/project_dio.dart';
-import 'package:provider/provider.dart';
-
+import '../../../product/global/theme_notifier.dart';
 import '../../../product/global/resource_context.dart';
-import '../../../product/global/theme_notifer.dart';
-import '../model/resoruce_model.dart';
 
 class ReqResView extends StatefulWidget {
   const ReqResView({Key? key}) : super(key: key);
@@ -44,7 +42,9 @@ class _ReqResViewState extends State<ReqResView> with ProjectDioMixin {
           body: Column(
             children: [
               const _TempPlaceHolder(),
-              Expanded(child: _resourceListview(context, context.watch<ReqResProvider>().resources)),
+              Expanded(
+                  child: _resourceListview(
+                      context, context.watch<ReqResProvider>().resources)),
             ],
           ),
         );
@@ -56,7 +56,9 @@ class _ReqResViewState extends State<ReqResView> with ProjectDioMixin {
     return ListView.builder(
       itemCount: items.length,
       itemBuilder: (BuildContext context, int index) {
-        return Card(color: Color(items[index].color?.colorValue ?? 0), child: Text(items[index].name ?? ''));
+        return Card(
+            color: Color(items[index].color?.colorValue ?? 0),
+            child: Text(items[index].name ?? ''));
       },
     );
   }
@@ -71,9 +73,9 @@ class _SaveAndNavigate extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: () {
-          context
-              .read<ReqResProvider>()
-              .saveToLocale(context.read<ResourceContext>(), context.read<ReqResProvider>().resources);
+          context.read<ReqResProvider>().saveToLocale(
+              context.read<ResourceContext>(),
+              context.read<ReqResProvider>().resources);
           Navigator.of(context).push(MaterialPageRoute(builder: (_) {
             return const ImageLearn202();
           }));

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'resoruce_model.g.dart';
+part 'resource_model.g.dart';
 
 String _fetchCustom(String data) {
   return 'aa';
@@ -34,12 +34,20 @@ class Data extends Equatable {
   final String? price;
   final StatusCode? status;
 
-  const Data({this.id, this.status, this.name, this.year, this.color, this.pantoneValue, this.price});
+  const Data(
+      {this.id,
+      this.status,
+      this.name,
+      this.year,
+      this.color,
+      this.pantoneValue,
+      this.price});
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return _$DataFromJson(json);
   }
 
+  /// Equatable: 15. video dk 1:25:00
   @override
   List<Object?> get props => [id, name, price];
 }
