@@ -1,20 +1,27 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_full_learn/404/bloc/feature/login/view/login_view.dart';
-import 'package:flutter_full_learn/product/global/resource_context.dart';
+import 'package:flutter_full_learn/product/constant/project_items.dart';
 import 'package:flutter_full_learn/product/global/theme_notifier.dart';
+import 'package:flutter_full_learn/product/init/product_init.dart';
 import 'package:provider/provider.dart';
 import '303/lottie_learn.dart';
 import 'product/navigator/navigator_manager.dart';
 import 'product/navigator/navigator_custom.dart';
 
-void main() {
-  runApp(MultiProvider(
-    providers: [
-      Provider(create: (_) => ResourceContext()),
-      ChangeNotifierProvider<ThemeNotifer>(create: (context) => ThemeNotifer())
-    ],
-    builder: (context, child) => const MyApp(),
-  ));
+Future<void> main() async {
+  final produtInit = ProductInit();
+  await produtInit.init();
+  runApp(
+    EasyLocalization(
+        supportedLocales: produtInit.localizationInit.supportedLocales,
+        path: produtInit.localizationInit
+            .localizationPath, // <-- change the path of the translation files
+        child: MultiProvider(
+          providers: produtInit.providers,
+          builder: (context, child) => const MyApp(),
+        )),
+  );
 }
 
 class MyApp extends StatelessWidget with NavigatorCustom {
@@ -24,8 +31,18 @@ class MyApp extends StatelessWidget with NavigatorCustom {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeNotifer().currentTheme,
+      title: ProjectItems.projectName,
+      debugShowCheckedModeBanner: false,
+      theme: context.watch<ThemeNotifer>().currentTheme,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+
+      builder: (context, child) {
+        return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+            child: child ?? const SizedBox());
+      },
 
       // ThemeData.dark().copyWith(
       //     tabBarTheme: const TabBarTheme(
